@@ -1,0 +1,51 @@
+{
+	"name": "geo",
+	"version": "1.0.0",
+	"description": "Location based ebpage",
+	"scripts": {
+		"start": "mongod --dbpath db & sleep 5 && nodemon backend/server.js & webpack-dev-server",
+		"build": "webpack",
+		"db": "mongod --dbpath db",
+		"server": "nodemon backend/server.js",
+		"frontend": "webpack-dev-server --host 0.0.0.0",
+		"watch": "webpack --watch"
+	},
+	"authors": [
+		"Hayk Hayrapetyan <haykhairapetyan@gmail.com>"
+	],
+	"license": "MIT",
+	"devDependencies": {
+		"babel-core": "^6.24.0",
+		"babel-loader": "^6.4.1",
+		"babel-preset-es2015": "^6.24.0",
+		"babel-preset-react": "^6.23.0",
+		"babel-preset-stage-2": "^6.22.0",
+		"css-loader": "^0.27.3",
+		"node-sass": "^4.5.0",
+		"sass-loader": "^6.0.3",
+		"style-loader": "^0.15.0",
+		"webpack": "^2.2.1",
+		"webpack-dev-server": "^2.4.2"
+	},
+	"dependencies": {
+		"antd": "^2.12.6",
+		"body-parser": "^1.17.2",
+		"cookie-parser": "^1.4.3",
+		"cors": "^2.8.3",
+		"express": "^4.15.3",
+		"geolib": "^2.0.23",
+		"google-maps-react": "^1.1.0",
+		"joi": "^10.6.0",
+		"js-cookie": "^2.1.4",
+		"material-ui": "^0.18.4",
+		"mongoose": "^4.11.0",
+		"nod-validate": "^2.0.12",
+		"nodemon": "^1.11.0",
+		"react": "^15.6.1",
+		"react-dom": "^15.6.1",
+		"react-redux": "^5.0.5",
+		"react-tap-event-plugin": "^2.0.1",
+		"redux": "^3.7.1",
+		"redux-thunk": "^2.2.0"
+	}
+}
