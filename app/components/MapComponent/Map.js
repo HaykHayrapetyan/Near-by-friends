@@ -15,20 +15,24 @@ class MapContainer extends Component {
 
   render() {
     console.log("propsutyun", this.props)
-    return (
-      <Map style={style} id="map" google={this.props.google} zoom={14} centerAroundCurrentLocation={true}>
+    if(this.props.google !== undefined){
+      return (
+        <Map style={style} id="map" google={this.props.google} zoom={14} centerAroundCurrentLocation={true}>
 
-        <Marker onClick={this.onMarkerClick}
-          name={'Current location'} position={{lat: this.props.users[0], lng: this.props.users[1]}}/>  
-        
+          <Marker onClick={this.onMarkerClick}
+            name={'Current location'} position={{lat: this.props.users[0], lng: this.props.users[1]}}/>  
+          
 
-        <InfoWindow onClose={this.onInfoWindowClose}>
-          <div>
-            <h1>inchvor ban</h1>
-          </div>
-        </InfoWindow>
-      </Map>
-    );
+          <InfoWindow onClose={this.onInfoWindowClose}>
+            <div>
+              <h1>inchvor ban</h1>
+            </div>
+          </InfoWindow>
+        </Map>
+      ) 
+    }
+    else 
+      return(null);
   }
 }
 

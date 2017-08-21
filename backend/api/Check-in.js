@@ -19,18 +19,19 @@ checkIn.get('/', (req, res) => {
             $geometry: { type: "Point",  coordinates: [ req.query.lat, req.query.lng ] },
             $maxDistance: 1000,
           },
-       }
-   }).sort({time: -1}).then(data => {
+       },
+        _id:{$ne: req.cookies.id}
+   }).sort({time: 1}).then(data => {
         var newObject = data.map((user, index) => {
             const newUser = Object.assign({}, user.toObject())
             var result = geolib.getDistance([ req.query.lat, req.query.lng ], user.location)
             newUser.distance = `${result} meters`
             return newUser
         })
-        console.log('new', newObject);
+        
         res.json(newObject)
     }, reason => {
-        console.log('error', reason)
+        
     })
 })
 
@@ -44,16 +45,20 @@ checkIn.post('/', (req, res) => {
                 res.status(500).send(err)
             }
             else{
-                user.insertMany({
-                    name,
-                    location,
-                    time: new Date() 
-                }).then(result => {
-                    console.log(result[0]._id)
-                    res.cookie("id", result[0]._id);
-                    res.cookie("name", result[0].name)
+                user.update({_id: req.cookies.id} ,
+                    {$set:{
+                    
+                        name,
+                        location,
+                        time: new Date() 
+                    }
+                }, {upsert: true}).exec(function (err, result) {
+                    result.upserted ? 
+                        res.cookie("id", result.upserted[0]._id)
+                        : null;
+                    res.cookie("name", req.body.name)
                     res.status(200).send('user successfully added')
-                },)
+                })
                
             }
 
